@@ -1,0 +1,55 @@
+/* styles.css */
+
+body {
+    font-family: 'Noto Sans','Noto Sans TC', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+form, .result {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label, input, textarea {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"], textarea {
+    width: 97%;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: #9c59db;
+    color: white;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: auto;
+    font-size: 15px;
+}
+
+input[type="submit"]:hover {
+    background-color: #663991;
+}
+
+h2 {
+    margin-top: 20px;
+    color: #333;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Translator</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Translate Classical Chinese to English</h1>
+    <form action="/" method="post">
+        <label for="text">Enter text:</label><br>
+        <textarea id="text" name="text" rows="4" cols="50"></textarea><br>
+        
+        <!-- <label for="dest_lang">Destination language:</label>
+        <input type="text" id="dest_lang" name="dest_lang"><br> -->
+        
+        <input type="submit" value="Translate" id="submit">
+    </form>
+
+    <p id="result"></p>
+    
+    <!-- {% if text and translation %}
+    <div class="result">
+        <h2>Translation Result</h2>
+        <p><strong>Original classical Chinese:</strong> {{ text }}</p>
+        <p><strong>Modern Chinese translation:</strong> {{ chinese_translation }}</p>
+        <p><strong>English translation:</strong> {{ english_translation }}</p>
+    </div>
+    {% endif %} -->
+    {% if text and chinese_translation and eng_translation %}
+    <div class="result" id="translationResult">
+        <h2>Translation Result</h2>
+        <p><strong>Original text:</strong><br/>{{ text }}</p>
+        <p><strong>Translated text:</strong><br/>{{ chinese_translation }}</p>
+        <p><strong>English translation:</strong><br/>{{ eng_translation }}</p>
+    </div>
+    {% endif %}
+
+    <!-- <script>
+        function decodeUnicode(text) {
+            return decodeURIComponent(JSON.parse('"' + text.replace(/\\u/g, '\\u') + '"'));
+        }
+
+
+        // $(document).ready(function(){
+        //     $('#translationForm').submit(function(event){
+        //         event.preventDefault();
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '/',
+        //             data: $(this).serialize(),
+        //             success: function(response){
+        //                 var decodedText = decodeUnicode(result.text);
+        //                 var decodedTranslation = decodeUnicode(result.translation);
+        //                 $('#originalText').text(decodedText);
+        //                 $('#translatedText').text(decodedTranslation);
+        //                 $('#translationResult').show();
+        //             },
+        //             error: function(error){
+        //                 console.log(error);
+        //             }
+        //         });
+        //     });
+        // });
+  
+    
+        // $(document).ready(function(){
+        //     $('#translationForm').submit(function(event){
+        //         event.preventDefault();
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '/',
+        //             data: $(this).serialize(),
+        //             success: function(response){
+        //                 var result = JSON.parse(response);
+        //                 var decodedText = decodeUnicode(result.text);
+        //                 var decodedTranslation = decodeUnicode(result.translation);
+        //                 $('#originalText').text(decodedText);
+        //                 $('#translatedText').text(decodedTranslation);
+        //                 $('#translationResult').show();
+        //             },
+        //             error: function(error){
+        //                 console.log(error);
+        //             }
+        //         });
+        //     });
+        // });
+   </script> -->
+
+   <!-- <script>
+    $(document).ready(function() {
+        $('#translationForm').submit(function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get the text from the textarea
+            var text = $('#text').val();
+
+            // Make an AJAX request to Flask server
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: { text: text },
+                success: function(response) {
+                    // Update the original and translated text
+                    $('#originalText').text(response.text);
+                    $('#translatedText').text(response.translation);
+
+                    // Display the result
+                    $('#translationResult').show();
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script> -->
+<script>
+    $(document).ready(function(){
+      $("#submit").click(function(){
+        var text = $("#text").val();
+        $.post("/translate",
+        {
+          text: text
+        },
+        function(data, status){
+          $("#result").html("Translation: " + data.chinese_translation);
+        });
+      });
+    });
+    </script>
+    
+    
+</body>
+</html>
